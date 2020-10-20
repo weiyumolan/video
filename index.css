@@ -1,0 +1,63 @@
+*{
+    margin:0;
+    padding:0;
+}
+body{
+    background:url(static/bg.gif) center no-repeat;
+    background-size: cover;
+}
+h1{
+    text-align: left;
+    margin-bottom: 20px;
+    
+}
+#app{
+    width:800px;
+    min-width: 200px;
+    margin:100px auto;
+    padding: 10px 0;
+    background:transparent;
+    opacity: .7;
+    text-align: center;
+}
+audio{
+    outline:none;
+}
+ul{
+    list-style: none;
+}
+ul>li{
+    margin:20px 20px;
+    padding:10px 5px;
+    text-align: left;
+    border-radius: 3px;
+}
+ul>li.active{
+    background-color: #D2E2F3;
+}
+button{
+    width: 60px;
+    height: 30px;
+    outline: none;
+    border:none;
+}
+button:hover{
+    background-color: skyblue;
+}
+@media only screen and (max-width: 600px){
+    #app{
+      margin: 100px auto;
+      width: 80%;
+      font-size: 14px;
+      text-align: center;
+    }
+    audio{
+        width: 260px;
+        height: 40px;
+    
+    }
+    #app h1{
+        text-align:center;
+       
+    }
+}

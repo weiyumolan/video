@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>音乐播放器案例</title>
+    <link rel="stylesheet" href="index.css">
+    <script src="vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h1>今日推荐</h1>
+        <!-- ended 自动播放下一首 -->
+        <audio :src="getCurrentSongSrc" controls autoplay @ended='handleEnded'></audio>
+        <ul>
+
+            <li :class='{active:index===currentIndex}' v-for='(item,index) in musicData' :key='item.id' @click='handleClick(index)'>
+                <h3>{{item.id}} - 歌名：{{item.name}}</h3>
+                <p>{{item.author}}</p>
+            </li>
+        </ul>
+        <button @click='handleLast'>上一首</button>
+        <button @click='handleNext'>下一首</button>
+    </div>
+    <script>
+        const musicData = [
+            {   
+                id:1,
+                name:'于荣光 - 少林英雄',
+                author:'于荣光',
+                songSrc:'static/于荣光 - 少林英雄.mp3'
+            },
+            {
+                id:2,
+                name:'常石磊,萨顶顶 - 你',
+                author:'常石磊,萨顶顶',
+                songSrc:'static/常石磊,萨顶顶 - 你.mp3'
+            },
+            {
+                id:3,
+                name:'宋雨潼 - 叫做长大.mp3',
+                author:'宋雨潼',
+                songSrc:'static/宋雨潼 - 叫做长大.mp3'
+            },
+            {
+                id:4,
+                name:'蔡方萌-行星',
+                author:'蔡方萌',
+                songSrc:'static/蔡方萌 - 行星.mp3'
+            },
+            {
+                id:5,
+                name:'Creep-creep',
+                author:'creep',
+                songSrc:'static/Creep.mp3'
+            }
+        ]
+      var vm =  new Vue({
+            el:'#app',
+            data:{
+                musicData,
+                currentSrc:'static/Creep.mp3',
+                currentIndex:0
+            },
+            computed:{
+                getCurrentSongSrc(){
+                    return this.musicData[this.currentIndex].songSrc;
+                }
+            },
+            methods:{
+                handleClick(index){ 
+                    this.currentIndex=index;
+                },
+                handleEnded(){
+                    // this.currentIndex++;
+                    // this.currentSrc=this.musicData[this.currentIndex].songSrc;
+                    this.handleNext();
+                },
+                handleNext(){
+                    this.currentIndex++;
+                    if(this.currentIndex===this.musicData.length){
+                      this.currentIndex=0;
+                    }
+                  
+                },
+                handleLast(){
+                    if(this.currentIndex<=0){
+                      this.currentIndex=this.musicData.length;
+                    }
+                    this.currentIndex--;
+                   
+                }
+            }
+        })
+    </script>
+</body>
+</html>
